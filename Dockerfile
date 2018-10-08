@@ -15,4 +15,4 @@ RUN apt update && \
     echo ";priority=5" > /usr/local/etc/php/conf.d/uopz.ini && \
     echo "extension=uopz.so" >> /usr/local/etc/php/conf.d/uopz.ini
 
-CMD gdb php test/test.php
+CMD sleep 3600
