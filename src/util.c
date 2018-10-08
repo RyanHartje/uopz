@@ -217,10 +217,12 @@ static void uopz_callers_init(void) { /* {{{ */
 			zend_internal_function *uopz = zend_hash_str_find_ptr(
 				CG(function_table), "uopz_call_user_func_array", sizeof("uopz_call_user_func_array")-1);
 
+			/*
 			if (zend_call_user_func->module == internal->module) {
 				__asm__("int3");
 				break;
 			}
+			*/
 
 			stack = *zend_call_user_func_array;
 		
