@@ -5,17 +5,14 @@ COPY . /usr/local/src/uopz
 
 WORKDIR /usr/local/src/uopz
 RUN apt update && \
-    apt install -y gdb \
+    DEBIAN_FRONTEND=noninteractive apt install -y gdb \
         vim \
-        ascii \
-        gpg \
         gcc \
-        software-properties-common && \
-    add-apt-repository -y ppa:ondrej/php && \
-    apt update && \
-    DEBIAN_FRONTEND=noninteractive apt install -y php7.2 \
-        php7.2-dev \
-        php7.2-phpdbg && \
+        wget \
+        php7.2-dev && \
+    wget http://launchpadlibrarian.net/388242196/php7.2-cli-dbgsym_7.2.10-0ubuntu0.18.04.1_amd64.ddeb && \
+    dpkg -i ./php7.2-cli-dbgsym_7.2.10-0ubuntu0.18.04.1_amd64.ddeb && \
+    sed -i 's|ptrace_scope = 1|ptrace_scope = 0|g' /etc/sysctl.d/10-ptrace.conf && \
     phpize && \
     ./configure && \
     make && \
@@ -23,7 +20,6 @@ RUN apt update && \
     make install && \
     echo ";priority=5" > /etc/php/7.2/mods-available/uopz.ini && \
     echo "extension=uopz.so" >> /etc/php/7.2/mods-available/uopz.ini && \
-    pecl install xdebug-2.6.0 && \
-    echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20170718/xdebug.so" >> /etc/php/7.2/cli/php.ini
+    cp /etc/php/7.2/mods-available/uopz.ini /etc/php/7.2/cli/conf.d/
 
 CMD sleep 3600
