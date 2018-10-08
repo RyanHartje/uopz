@@ -1,3 +1,4 @@
+<?php
 function myfunction( &$anobject ) { 
     return 'success'; 
 }
@@ -14,3 +15,4 @@ class MyClass
 }
 $myobject = new MyClass;
 
+?>

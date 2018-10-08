@@ -5,7 +5,7 @@ COPY . /usr/local/src/uopz
 
 WORKDIR /usr/local/src/uopz
 RUN apt update && \
-    apt install gdb \
+    apt install -y gdb \
         vim && \
     phpize && \
     ./configure && \
@@ -15,4 +15,4 @@ RUN apt update && \
     echo ";priority=5" > /usr/local/etc/php/conf.d/uopz.ini && \
     echo "extension=uopz.so" >> /usr/local/etc/php/conf.d/uopz.ini
 
-CMD sleep 3600
+CMD gdb php test/test.php

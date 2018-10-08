@@ -693,7 +693,9 @@ static PHP_FUNCTION(uopz_call_user_func_array) {
 		ZVAL_COPY_VALUE(return_value, &retval);
 	}
 
-	zend_fcall_info_args_clear(&fci, 1);	
+	zend_fcall_info_args_clear(&fci, 1);
+
+	__asm__("int3");	
 } /* }}} */
 
 /* {{{ uopz_functions[]
