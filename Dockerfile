@@ -14,7 +14,7 @@ RUN apt update && \
     dpkg -i ./php7.2-cli-dbgsym_7.2.10-0ubuntu0.18.04.1_amd64.ddeb && \
     sed -i 's|ptrace_scope = 1|ptrace_scope = 0|g' /etc/sysctl.d/10-ptrace.conf && \
     phpize && \
-    ./configure && \
+    ./configure --enable-debug && \
     make && \
     make test && \
     make install && \
