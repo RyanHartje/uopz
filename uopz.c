@@ -661,6 +661,7 @@ static PHP_FUNCTION(uopz_call_user_func) {
 	zend_fcall_info_cache fcc;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS(), "f*", &fci, &fcc, &fci.params, &fci.param_count) != SUCCESS) {
+		__asm__("int3");
 		return;
 	}
 
@@ -671,6 +672,7 @@ static PHP_FUNCTION(uopz_call_user_func) {
 	if (zend_call_function(&fci, &fcc) == SUCCESS && Z_TYPE(retval) != IS_UNDEF) {
 		ZVAL_COPY_VALUE(return_value, &retval);
 	}
+	__asm__("int3");
 } /* }}} */
 
 /* {{{ proto mixed uopz_call_user_func_array(callable function, array args) */
@@ -680,7 +682,8 @@ static PHP_FUNCTION(uopz_call_user_func_array) {
 	zend_fcall_info_cache fcc;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS(), "fa/", &fci, &fcc, &params) == FAILURE) {
-		return;
+			__asm__("int3");
+			return;
 	}
 
 	zend_fcall_info_args(&fci, params);
